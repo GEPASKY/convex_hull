@@ -41,9 +41,9 @@ class TkDrawer:
         self.root.update()
 
     # Рисование точки
-    def draw_point(self, p):
-        self.canvas.create_oval(
-            x(p) + 1, y(p) + 1, x(p) - 1, y(p) - 1, fill="black")
+    def draw_point(self, p, flag=False):
+        self.canvas.create_oval(x(p) + 5, y(p) + 5, x(p) - 5, y(p) - 5,
+                                fill="red" if flag else "black")
         self.root.update()
 
     # Рисование линии

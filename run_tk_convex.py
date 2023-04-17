@@ -9,16 +9,23 @@ def void_draw(self, tk):
 
 
 def point_draw(self, tk):
-    tk.draw_point(self.p)
+    tk.draw_point(self.p,
+                      flag=self.p.is_near_p1(self.p1, self.p2))
 
 
 def segment_draw(self, tk):
     tk.draw_line(self.p, self.q)
+    tk.draw_point(self.p,
+                      flag=self.p.is_near_p1(self.p1, self.p2))
+    tk.draw_point(self.q,
+                      flag=self.q.is_near_p1(self.p1, self.p2))
 
 
 def polygon_draw(self, tk):
     for n in range(self.points.size()):
         tk.draw_line(self.points.last(), self.points.first())
+        tk.draw_point(self.points.first(),
+                      flag=self.points.first().is_near_p1(self.p1, self.p2))
         self.points.push_last(self.points.pop_first())
 
 
@@ -42,7 +49,7 @@ try:
         f = f.add(R2Point())
         tk.clean()
         f.draw(tk)
-        print(f"S = {f.area()}, P = {f.perimeter()}\n, G = {f.count()}")
+        print(f"S = {f.area()}, P = {f.perimeter()}\n, G = {f.g()}")
 except(EOFError, KeyboardInterrupt):
     print("\nStop")
     tk.close()
